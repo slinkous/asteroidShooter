@@ -46,6 +46,21 @@ function animate(){
     }
 
   })
+  let astroGeo = new THREE.SphereGeometry(5, 4, 4);
+  let astroMat = new THREE.MeshLambertMaterial({color: 0x997577})
+  if(asteroids.length < asteroidCount){
+
+    if (Math.random() < 0.01){
+      let asteroid = new THREE.Mesh(astroGeo, astroMat);
+      asteroid.position.z = 500;
+      asteroid.position.x = Math.random()*100 - 50;
+      asteroid.position.y = Math.random()*100 - 50;
+      asteroid.speed = {};
+      asteroid.speed = 0;
+      asteroids.push(asteroid);
+      scene.add(asteroid);
+    }
+  }
 
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
