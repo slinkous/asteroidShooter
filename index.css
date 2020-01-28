@@ -1,0 +1,104 @@
+* {
+  box-sizing: border-box;
+}
+:root {
+  --black: #170e19;
+  --green-dark: #213b25;
+  --green-mid: #3a604a;
+  --green-light: #4f7754;
+  --tan-light: #a19f7c;
+  --tan-dark: #77744f;
+  --rust-light: #775c4f;
+  --rust-mid: #603b3a;
+  --rust-dark: #3b2137;
+  --purple-dark: #2f213b;
+  --purple-mid: #433a60;
+  --purple-light: #4f5277;
+  --ice-dark: #65738c;
+  --ice-mid: #7c94a1;
+  --ice-light: #a0b9ba;
+  --white: #c0d1cc;
+}
+body {
+  margin: 0;
+  color: var(--tan-dark);
+  background: var(--ice-mid);
+}
+#console-container{
+  background-image: linear-gradient(to bottom right, var(--rust-mid), var(--rust-light));
+  border-width: 10px;
+  border-style: solid;
+  border-image: linear-gradient(to bottom, var(--green-mid), var(--rust-dark));
+  border-top: 10px dotted var(--green-light);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+#console-border{
+  border-top: 20px dotted var(--green-light);
+  margin: 2%;
+  height: 85%;
+}
+#monitor-container{
+  background-image: radial-gradient( var(--black), var(--black), var(--purple-dark));
+  border-top: 15px var(--rust-dark) solid;
+  border-left: 15px var(--rust-dark) solid;
+  border-right: 8px var(--purple-light) solid;
+  border-bottom: 8px var(--purple-light) solid;
+  border-radius: 15%;
+  top: 100px;
+  bottom: 200px;
+  left: 100px;
+  right: 100px;
+  position: absolute;
+  /* width: 80%; */
+  /* height: 80%; */
+}
+canvas {
+  diplay: box;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 100%;
+}
+#control-center{
+  position: absolute;
+  bottom: 100px;
+  left: 100px;
+  width: calc(100% - 100px);
+}
+#control-center ul {
+  list-style-type: none;
+}
+#control-center ul li{
+  float: left;
+  margin-right: 1em;
+  width: calc(90% / 20);
+}
+#control-center button{
+  background-color: var(--tan-light);
+  color: var(--green-dark);
+  border-color: var(--green-light);
+  border-radius: 10px;
+  content: "#";
+  width: 3em;
+  height: 3em;
+}
+
+.slider{
+  height: 20px;
+  border-radius: 5px;
+  background: var(--tan-dark);
+  outline: var(--rust-mid);
+}
+
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: var(--green-mid);
+}

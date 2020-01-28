@@ -1,34 +1,33 @@
+import Asteroid from './asteroid.js';
+
 let scene, camera, renderer, ambient, directional;
 let asteroids, asteroidCount;
 
 function init(){
   scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 1, 1000);
-  renderer = new THREE.WebGLRenderer();
-  renderer.setSize(window.innerWidth, window.innerHeight)
-  document.body.appendChild(renderer.domElement)
+    let container = document.querySelector("#monitor-container")
+  camera = new THREE.PerspectiveCamera(60, container.offsetWidth/container.offsetHeight, 1, 1000);
+  renderer = new THREE.WebGLRenderer({alpha:true});
 
-  // ambient = new THREE.AmbientLight(0x555555);
-  // scene.add(ambient);
 
-  directional = new THREE.DirectionalLight(0xf6d6bd, 0.5)
-  // direction.position.z =100;
-  scene.add(directional)
+  console.log(container.offsetHeight)
+  renderer.setSize(container.offsetWidth, container.offsetHeight);
+  container.appendChild(renderer.domElement)
+  // scene.background = new THREE.Color( 0x000000, 0 );
+  renderer.setClearColor( 0x000000, 0 );
+  ambient = new THREE.AmbientLight(0x555555);
+  scene.add(ambient);
+
+  // directional = new THREE.DirectionalLight(0xf6d6bd, 0.5)
+  // // direction.position.z =100;
+  // scene.add(directional)
 
   asteroidCount = 20;
   asteroids = [];
-  asteroidCount = 20;
-  let astroGeo = new THREE.SphereGeometry(5, 4, 4);
-  let astroMat = new THREE.MeshLambertMaterial({color: 0x997577})
-  for(let i=0; i<5; i++){
-    let asteroid = new THREE.Mesh(astroGeo, astroMat);
-    asteroid.position.z = Math.random()*400 + 100;
-    asteroid.position.x = Math.random()*100 - 50;
-    asteroid.position.y = Math.random()*100 - 50;
-    asteroid.speed = {};
-    asteroid.speed = 0;
-    asteroids.push(asteroid);
-    scene.add(asteroid);
+
+
+  for(let i=0; i<2; i++){
+    asteroids.push(new Asteroid(scene))
   }
   camera.position.set(0, 0, -100);
   camera.lookAt(scene.position);
@@ -40,25 +39,16 @@ function animate(){
 
 
   asteroids.forEach((a) => {
-    if(a.position.z > 10){
-      a.speed += 0.002
-      a.position.z -= a.speed;
-    }
-
+    a.move();
   })
   let astroGeo = new THREE.SphereGeometry(5, 4, 4);
   let astroMat = new THREE.MeshLambertMaterial({color: 0x997577})
+  let asteroidChance = 0.005;
   if(asteroids.length < asteroidCount){
 
-    if (Math.random() < 0.01){
-      let asteroid = new THREE.Mesh(astroGeo, astroMat);
-      asteroid.position.z = 500;
-      asteroid.position.x = Math.random()*100 - 50;
-      asteroid.position.y = Math.random()*100 - 50;
-      asteroid.speed = {};
-      asteroid.speed = 0;
-      asteroids.push(asteroid);
-      scene.add(asteroid);
+    if (Math.random() < asteroidChance){
+      asteroids.push(new Asteroid(scene));
+      asteroidChance += 0.001;
     }
   }
 
