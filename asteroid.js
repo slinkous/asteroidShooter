@@ -14,12 +14,14 @@ export default class Asteroid extends THREE.Mesh{
     this.rotationalSpeed = Math.random()*0.1 - 0.05;
     scene.add(this);
   }
-  move(){
-    if(this.position.z > 10){
+  move(sound){
+    if(this.position.z > 0){
       this.speed += 0.002
       this.position.z -= this.speed;
       this.rotation.y += this.rotationalSpeed;
       this.rotation.x += this.rotationalSpeed;
+    } else {
+      sound.stop()
     }
   }
 }
